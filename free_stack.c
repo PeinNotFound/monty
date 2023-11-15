@@ -5,15 +5,17 @@
 * @head: head of the stack
 */
 
-void free_stack(stack_t *head)
+void free_stack(stack_t **stack)
 {
-	stack_t *aux;
-
-	aux = head;
-	while (head)
+	if (stack == NULL || *stack == NULL)
 	{
-		aux = head->next;
-		free(head);
-		head = aux;
+		return;
+	}
+
+	while (*stack != NULL)
+	{
+		stack_t *tmp = *stack;
+		*stack = (*stack)->next;
+		free(tmp);
 	}
 }
